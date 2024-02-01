@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .active{
+        color:red;
+      }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+      <!-- 绑定变量 -->
+      <a :href="res.url" v-bind:title="res.title">{{res.name}}</a>
+      <img :src="imgSrc" :alt="呵呵呵">
+      <!-- 绑定类名 -->
+      <div class="name" :class="{active:isActive}">hello bind</div>
+      <!-- 绑定样式 -->
+      <div :style='{color:isColor,fontSize:fontSize+"px"}'>hello bind</div>
+        <input type="text" :value="msg" @input="updateVal">
+        
+        {{msg}}
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        res:{
+          name:'阿里',
+          url:'http:www.baldu.com',
+          title:'搜索一下'
+        },
+        imgSrc:'/image/aa.png',
+        isActive:true,
+        msg:"hello v-bind",
+        isColor:'green',
+        fontSize: 30
+      },
+      methods:{
+        updateVal(e){
+          this.msg = e.target.value;
+        }
+      }
+    });
+</script>
+</html>
