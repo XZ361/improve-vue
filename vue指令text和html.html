@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>hello vue</h1>
+        <h1>{{msg}}</h1>
+        <h1 v-text="msg2"></h1>
+        <div v-html="msg3"></div>
+        <div v-html="msg2"></div>
+    </div>
+</body>
+<script>
+  // {{}}和v-text都是插入值，类似innerText
+  // v-html既能插入值，也能插入html标签,类似innerHtml
+    const vm = new Vue({
+        el:"#app",
+        data:{
+          msg:'hello world',
+          msg2:'天气高啊',
+          msg3:'<p>不错不错</p>'
+        },
+    });
+</script>
+</html>
