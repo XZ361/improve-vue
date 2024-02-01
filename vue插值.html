@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    div{
+        margin: 0 auto;
+        padding: 10px 20px;
+        border: 1px solid red;
+    }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    	<h1>{{msg}}</h1>
+    	<h1>{{2}}</h1>
+    	<h1>{{'hahah'}}</h1>
+    	<h1>{{20<1 ? 'true':'false'}}</h1>
+    	<h1>{{txt.split('').reverse().join('')}}</h1>
+    	<h1>{{getContent}}</h1>
+    	<h1>{{getContent()}}</h1>
+    </div>
+    <script>
+        // console.log(Vue);
+				// 初始化
+				const vm = new Vue({
+					el: "#app",
+					data:{
+						msg: 'hello Vue!',
+						txt: 'and hello world!'
+					},
+					methods:{
+						getContent(){
+							return this.msg+' '+this.txt;
+						}
+					}
+				});
+				console.log(vm);
+				console.log(vm.$data);
+				console.log(vm.txt);
+    </script>
+</body>
+</html>
