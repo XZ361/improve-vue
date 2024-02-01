@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="isShow">哈哈</h1>
+        <h1 v-else="true">呵呵</h1>
+        <h1 v-show="isDisplay">{{msg}}</h1>
+        <h1 v-show="!isDisplay">{{msg}}</h1>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:"#app",
+        data:{
+          msg: 'hello v-if/v-show',
+          isShow: Math.random() > 0.5,
+          isDisplay:true
+        }
+    })
+</script>
+</html>
