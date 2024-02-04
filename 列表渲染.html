@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul>li{
+            color: red;
+            list-style-type: none;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in menu" :key="item.id">{{item.val}}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el : "#app",
+            data:{
+                menu:[
+                    {id:1,val:"烤腰子"},
+                    {id:2,val:"烤羊肉"},
+                    {id:3,val:"烤大葱"},
+                    {id:4,val:"烤鸡蛋"},
+                ]
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
