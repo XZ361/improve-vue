@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+       <p>{{stu[0].name}}</p>
+        <button @click="stu[0].name='Tom'">改变</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:'hello',
+                stu:[{name:'jack'}]
+            },
+            watch:{
+                // 侦听器可以直接监听基本数据类型；复杂数据类型要深度监听
+                // key表示data中的属性
+                'msg':function(newV,oldV){
+                    console.log(newV,oldV);
+                },
+                'stu':{
+                    deep:true,
+                    handler:function(newV){
+                        console.log(newV);
+                    }
+                }
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
