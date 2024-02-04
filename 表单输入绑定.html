@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- input输入框 -->
+        <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+        <!-- 多行文本输入框 -->
+        <textarea name="" id="" cols="30" rows="10" v-model="value"></textarea>
+        {{value}}
+        <br>
+        <!-- select选择框 - 单选时-->
+        select选择框 - 单选时
+        <select name="" id="" v-model="selected">
+            <option disabled value="">请选择</option>
+            <option >A</option>
+            <option >B</option>
+            <option >C</option>
+        </select>
+        {{selected}}
+        <br>
+        <!-- select选择框-- 多选时 -->
+        select选择框-- 多选时
+        <select name="" id="" multiple v-model="selected1">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        {{selected1}}
+        <br>
+        <!-- v-for渲染的动态选项 -->
+        v-for渲染的动态选项
+        <select name="" id="" v-model="selected2">
+            <!-- <option disabled value="">请选择</option> -->
+            <option v-for="(item,index) in items" :value="item.name">{{item.id}}</option>
+        </select>
+        {{selected2}}
+        <br>
+        <!-- 单选按钮 -->
+        单选按钮
+        <input type="radio" id="one" value="one" v-model="checked0">
+        <label for="one">one</label>
+        <input type="radio" id="two" value="two" v-model="checked0">
+        <label for="two">two</label>
+        {{checked0}}
+        <br>
+        <!-- 单个复选框 -->
+        单个复选框
+        <input type="checkbox" id="xxx" v-model="checked">
+        <label for="xxx">{{checked}}</label>
+        <br>
+        <!-- 多个复选框 -->
+        多个复选框
+        <input type="checkbox" value="Jack" id="1" v-model="checked1">
+        <label for="1">Jack</label>
+        <input type="checkbox" value="Tom" id="2" v-model="checked1">
+        <label for="2">Tom</label>
+        <input type="checkbox" value="XM" id="3" v-model="checked1">
+        <label for="3">XM</label>
+        <p>{{checked1}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:'hello input',
+                value:'ahhaaaa kfewrhvjwfe',
+                items:[
+                    {id:"1",name:"xxx"},
+                    {id:"2",name:"vv2"},
+                    {id:"3",name:"cc3"},
+                    {id:"4",name:"dd4"},
+                ],
+                selected:'',
+                selected1:[],
+                selected2:"xxx",
+                checked:false,
+                checked0:'',
+                checked1:[]
+
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
