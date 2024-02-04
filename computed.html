@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{reverseMsg}}</p>
+        <button @click="handleClick">改变</button>
+        <p>{{fullName}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'hello world',
+                firstName:'XZ',
+                lastName:'W'
+            },
+            computed:{
+                // computed最大的好处是带来了缓存；如果数据没有发生变化，就直接存缓存中拿
+                reverseMsg:function(){
+                    return this.msg.split('').reverse().join('');
+                },
+                fullName:function(){
+                    return this.firstName+ ' '+this.lastName;
+                }
+            },
+            methods:{
+                handleClick(){
+                    this.msg='hehehehe';
+                }
+            }
+        })
+    </script>
+</body>
+</html>
