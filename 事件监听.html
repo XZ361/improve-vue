@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        .active{
+            background-color: green;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+<body>
+   <div id="app">
+    <button @click="handleClick">+1</button>
+    <div class="box" :class="{active:isActive}">{{num}}</div>
+    <button @click="changeClick">切换</button>
+   </div>
+    <script>
+        const vm  = new Vue({
+            el:"#app",
+            data:{
+                num:0,
+                isActive:false,
+            },
+            methods:{
+                handleClick(){
+                    this.num+=1;
+                },
+                changeClick(){
+                    this.isActive = !this.isActive;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
