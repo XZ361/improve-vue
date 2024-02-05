@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="content" @input="handleInput">
+        {{msg}}
+        <button @click="handleClick">改变</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:''
+            },
+            computed:{
+                content:{
+                    set:function(newV){
+                        // console.log(newV);
+                        this.msg = newV;
+                    },
+                    get:function(){
+                        return this.msg;
+                    }
+                }
+            },
+            methods:{
+                handleInput(e){
+                    const {value} = e.target;
+                    this.content = value;
+                },
+                handleClick(){
+                    console.log(this.msg);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
