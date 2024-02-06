@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{price | myPrice('$')}}
+        <h3>
+        {{msg | reverseMsg}}
+        </h3>
+    </div>
+    <script>
+        // 过滤器有全局过滤器和局部过滤器
+        Vue.filter('reverseMsg',(val)=>{
+            return val.split('').reverse().join('');
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                price:10,
+                msg:'hello 过滤器'
+            },
+            filters:{
+                myPrice:function(price,a){
+                    return a+price
+                }
+
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>
