@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <App></App>
+        
+    </div>
+    <script>
+        // 全局
+        Vue.component('Vheader',{
+            template:`
+                <div>我是导航组件 </div>
+            `,
+        })
+        Vue.component('Vaside',{
+            template:`
+                <div>我是侧边栏组件 </div>
+            `,
+        })
+        const Vcontent={
+            data() {
+                return {
+                }
+            },
+            template:`
+            <div>我是内容组件</div>
+            `
+        }
+        // 局部
+        const App= {
+            data(){
+                return {
+                    msg:'这是APP组件'
+                }
+            },
+            components: {
+                Vcontent,
+            },
+            template:`
+            <div>
+                <Vheader></Vheader>
+                <div>
+                    <Vaside></Vaside>
+                    <Vcontent></Vcontent>    
+                </div>
+            </div>
+            `,
+            methods:{
+                handleClick(){
+                    this.msg="改变了数据"
+                }
+            }
+        }
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            components:{
+                App
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
