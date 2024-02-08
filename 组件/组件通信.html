@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <App></App>
+  </div>
+  <script>
+    Vue.component('Child',{
+      props: {
+        val:{
+          default:''
+        }
+      },
+      data() {
+        return {
+          name:'校长'
+        }
+      },
+      template:`
+        <div>
+          我是一个子组件
+          <h3>{{val}}</h3>
+          <button @click="handleClick">通信</button></button>
+        </div>
+      `,
+      methods: {
+        handleClick(){
+          this.$emit('haha',this.name);
+        }
+      }
+    })
+    const App={
+      data() {
+        return {
+          msg:'我是父组件传的值'
+        }
+      },
+      template:`
+        <div>
+          <Child :val="msg" @haha="handleChild"/>
+        </div>
+      `,
+      methods: {
+        handleChild(v) {
+          console.log(v)
+        }
+      },
+    }
+    new Vue({
+      el:"#app",
+      components: {
+        App
+      },
+      data:{
+
+      },
+      methods:{
+
+      }
+    })
+  </script>
+</body>
+</html>
