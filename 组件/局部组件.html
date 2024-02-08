@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <App></App>
+        
+    </div>
+    <script>
+        const App= {
+            data(){
+                return {
+                    msg:'这是APP组件'
+                }
+            },
+            template:`
+            <div>
+                <h3>{{msg}}</h3>
+                <button @click="handleClick">点击</button>
+            </div>
+            `,
+            methods:{
+                handleClick(){
+                    this.msg="改变了数据"
+                }
+            }
+        }
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            components:{
+                App
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
