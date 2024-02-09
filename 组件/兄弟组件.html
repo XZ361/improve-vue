@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <App/>
+  </div>
+  <script>
+    // 兄弟组件传值
+    // 1.通过事件总线 const bus = new Vue（）;bus.$on()绑定事件/bus.$emit()触发事件
+    // 2.通过兄弟组件共同的父元素通信
+    // 3.使用vuex
+    const bus = new Vue();
+    Vue.component('ComponentA',{
+      data() {
+        return {
+          msg: 1
+        }
+      },
+      methods:{
+        handleClick(){
+          bus.$emit('add',this.msg);
+        }
+      },
+      template:`
+        <div>我是A组件
+          <button @click="handleClick">触发A组件</button>
+          </div>
+      `
+    })
+    Vue.component('ComponentB',{
+      data() {
+        return {
+          count:0
+        }
+      },
+      created () {
+        bus.$on('add',(a)=>{
+          this.count +=a;
+        });
+      },
+      methods:{
+      },
+      template:`
+        <div>我是B组件
+          <div>{{count}}</div>
+          </div>
+      `
+    })
+    const App={
+      data() {
+        return {
+        }
+      },
+      template:`
+      <div>
+        <h2>我是父组件</h2>
+        <ComponentA></ComponentA>
+        <ComponentB></ComponentB>
+      </div>
+      `
+    }
+    new Vue({
+      el:"#app",
+      components:{
+        App
+      },
+      data:{
+
+      },
+      methods:{
+
+      }
+    })
+  </script>
+</body>
+</html>
