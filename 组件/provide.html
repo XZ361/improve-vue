@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <App/>
+  </div>
+  <script>
+    // 跨层级组件通信：provide提供变量，inject用来注入变量，不论组件嵌套多深都可以
+    Vue.component('B',{
+      data() {
+        return {
+        }
+      },
+      inject:['msg'], 
+      created () {
+        console.log(this.msg);;
+      },
+      template:`
+        <div>
+        <h3>我是b组件</h3>  
+        {{msg}}
+        </div>
+      `
+    })
+    Vue.component('A',{
+      data() {
+        return {
+        }
+      },
+      template:`<div>我是A组件<B></B></div>`
+    })
+    const App={
+      data() {
+        return {
+        }
+      },
+      provide(){
+        return {
+          msg:'来自祖先的数据'
+        }
+      },
+      template:`
+        <div>
+          <A/>  
+        </div>
+      `
+    }
+    new Vue({
+      el:"#app",
+      components:{
+        App
+      },
+      data:{
+        
+
+      },
+      methods:{
+
+      }
+    })
+  </script>
+</body>
+</html>
