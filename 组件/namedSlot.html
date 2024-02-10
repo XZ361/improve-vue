@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>具名插槽</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <App/>
+  </div>
+  <script>
+    Vue.component('YBtn',{
+      template:`
+            <button>
+              <slot name="login"></slot>
+              <slot name="register"></slot>
+              <slot name="submit"></slot>
+            </button>
+        `
+    })
+    const App ={
+      data() {
+        return {
+        }
+      },
+      template:`
+        <div>
+          hello
+          <y-btn>
+            <template slot="login">
+              <a url="">登录</a>
+            </template>
+          </y-btn>
+          <y-btn>
+            <template slot="login">
+              <a url="">注册</a>
+            </template>
+          </y-btn>
+          <y-btn>
+            <template slot="login">
+              <a url="">提交</a>
+            </template>
+          </y-btn>
+        </div>
+      `
+    }
+    new Vue({
+      el:"#app",
+      data() {
+        return {
+        }
+      },
+      components:{
+        App
+      },
+      methods: {
+        
+      }
+    })
+  </script>
+</body>
+</html>
