@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作用域插槽</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <App/>
+  </div>
+  <script>
+    const todoList={
+      data() {
+        return {
+        }
+      },
+      props: {
+        todos:Array,
+        defaultValue:[]
+      },
+      template:`
+        <ul>
+          <li v-for="item in todos" :key="item.id">
+            <slot :itemValue = "item"></slot>
+            {{item.title}}  
+          </li>  
+        </ul>
+      `
+    }
+    const App ={
+      data() {
+        return {
+          todoList:[
+            {
+              id:1,
+              title:'按a封口反馈',
+              isComplete:true
+            },
+            {
+              id:2,
+              title:'rehgowebg ',
+              isComplete:false
+            },
+            {
+              id:3,
+              title:'地us哼we人',
+              isComplete:true
+            },
+            {
+              id:4,
+              title:'dihyonrrwnk',
+              isComplete:false
+            }
+          ]
+        }
+      },
+      components:{
+        todoList
+      },
+      template:`
+        <div>
+          <todoList :todos="todoList">
+            <template v-slot="data">
+              <input type="checkbox" v-model="data.itemValue.isComplete"></input>
+            </template>  
+          </todoList>
+        </div>
+      `
+    }
+    new Vue({
+      el:"#app",
+      data() {
+        return {
+        }
+      },
+      components:{
+        App
+      },
+      methods: {
+        
+      }
+    })
+  </script>
+</body>
+</html>
