@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const toggleShow = {
+      data() {
+        return {
+          isShow: false
+        }
+      },
+      methods: {
+        toggleShow(){
+          this.isShow = !this.isShow;
+        }
+      }
+    }
+    // 一个模态框 一个提示框
+    // 二者看起来不一样 用起来也不一样 逻辑相同可以抽离
+    const Modal= {
+      template:`
+        <div  v-if="isShow">
+          <h3> 模态框组件 </h3>  
+        </div>
+      `,
+      mixins:[toggleShow]
+    }
+    const ToolTip = {
+      template:`
+        <div v-if="isShow">
+          <h3>提示框组件</h3>  
+        </div>
+      `,
+      mixins: [toggleShow],
+    }
+    new Vue({
+      el:"#app",
+      data() {
+        return {
+        }
+      },
+      components: {
+        Modal,
+        ToolTip
+      },
+      template:`
+        <div>
+          <button @click="handleModal">模态框</button>  
+          <button @click="handleToolTip">提示框</button> 
+          <Modal ref='modal'></Modal> 
+          <ToolTip ref='tooltip'></ToolTip> 
+        </div>
+      `,
+      methods: {
+        handleModal(){
+          console.log(this.$refs.modal.toggleShow);
+          // eval(this.$refs.modal.toggleShow());
+          console.log(this.$refs.modal.toggleShow instanceof Function);
+        },
+        handleToolTip(){
+          this.$refs.tooltip.toogleShow();
+          eval(this.$refs.tooltip.toggleShow());
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>
