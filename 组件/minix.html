@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h3>{{msg}}</h3>
+    <h1>{{title}}</h1>
+  </div>
+  <script>
+    // mixin混入功能来分发vue组件中可复用的功能
+    const myMinix={
+      data() {
+        return {
+          title: 'hello minix!'
+        }
+      },
+      created () {
+        this.sayHello();
+      },
+      methods: {
+        sayHello(){
+          console.log('执行sayHello方法');
+        }
+      }
+    }
+  new Vue(
+    {
+      el:"#app",
+      data() {
+        return {
+          msg:'hello web'
+        }
+      },
+      mixins:[myMinix]
+
+    }
+  )
+  </script>
+</body>
+</html>
