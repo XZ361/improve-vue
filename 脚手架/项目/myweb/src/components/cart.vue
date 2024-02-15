@@ -61,8 +61,9 @@ export default {
         return sum;
       },0)
      }
-   },created () {
-    console.log(this.carts);
+   },
+   created () {
+    
    },
    methods: {
      remove(i){
