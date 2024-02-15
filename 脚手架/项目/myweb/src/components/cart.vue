@@ -36,7 +36,7 @@ export default {
    data() {
      return {
       // 数据持久化存储，防止刷新页面，数据丢失
-      carts: JSON.parse(localStorage.getItem('carts')),
+      carts: JSON.parse(localStorage.getItem('carts')) || [],
      }
    },
    computed: {
