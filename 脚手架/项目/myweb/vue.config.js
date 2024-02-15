@@ -35,9 +35,9 @@ module.exports={
 
       devServer.app.get('/api/cartList', (req, res) =>{
         res.json({
-          data:[
+          result:[
             {id:1,title:'vue课程',price:30,count:1,active:true},
-            {id:1,title:'react课程',price:60,count:1,active:true},
+            {id:2,title:'react课程',price:60,count:1,active:true},
           ]
         })
       });

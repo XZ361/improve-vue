@@ -5,53 +5,42 @@
       <li v-for="(item,index) in cartLists" :key="index">
         <h3>{{ item.title }}</h3>
         <p>{{ item.price }}</p>
+        <button @click="addCart(index)">添加商品</button>
       </li>
     </ul>
-    <my-cart :title="title" :cart="cartLists"></my-cart>
+    <my-cart :title="title"></my-cart>
   </div>
 </template>
 
 <script>
 import myCart from "./components/cart.vue";
+
 export default {
   name: 'App',
   data() {
     return {
       title:'购物车',
       cartLists:[],
-      // cartLists:[
-      //   {id:1,title:'vue课程',price:30,count:1,active:true},
-      //   {id:1,title:'react课程',price:60,count:1,active:true},
-      // ]
     }
   },
   components: {
     myCart
   },
   created () {
-    // this.getContent();
-    this.$fetch.get('/api/cartList')
-      .then(res=>{
-        this.cartLists = res.data.data;
-      }).catch(err=>{
-        console.log(err);
-      })
+    this.getContent();
   },
   methods: {
     getContent() {
-      // this.$fetch.get('/api/cartList')
-      // .then(res=>{
-      //   this.cartLists = res.data.data;
-      // }).catch(err=>{
-      //   console.log(err);
-      // })
-      
-      // try {
-      //   const res =await this.$fetch.get('/api/cartList');
-      //   this.cartLists = res.data.data;
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      this.$fetch.get('/api/cartList')
+      .then(res=>{
+        this.cartLists = res.data.result;
+      }).catch(err=>{
+        console.log(err);
+      })
+    },
+    addCart(i){
+      const good = this.cartLists[i];
+      this.$bus.$emit('addCart1',good);
     }
   },
 }

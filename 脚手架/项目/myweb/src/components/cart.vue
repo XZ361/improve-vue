@@ -32,10 +32,11 @@
 <script>
 export default {
    name: 'my-cart',
-   props: ['title','cart'],
+   props: ['title'],
    data() {
      return {
-      carts: this.cart,
+      // 数据持久化存储，防止刷新页面，数据丢失
+      carts: JSON.parse(localStorage.getItem('carts')),
      }
    },
    computed: {
@@ -62,10 +63,32 @@ export default {
       },0)
      }
    },
+   watch: {
+    carts:{
+      handler(n){
+        this.setLocalData(n);
+      },
+      deep:true
+    }
+   },
    created () {
-    
+    this.$bus.$on('addCart1',(good)=>{
+      // console.log(good);
+      let ret = this.carts.find((v)=>v.id===good.id);
+      if(!ret){
+        this.carts.push(good);
+        // console.log(ret);
+      }else{
+        ret.count+=1;
+        // console.log(ret);
+      }
+    })
    },
    methods: {
+    // 数据持久化存储
+    setLocalData(n){
+      localStorage.setItem('carts',JSON.stringify(n))
+    },
      remove(i){
       if(window.confirm("确定是否要删除？")){
         this.carts.splice(i,1);
