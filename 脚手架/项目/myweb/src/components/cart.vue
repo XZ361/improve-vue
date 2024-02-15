@@ -1,6 +1,40 @@
 <template>
    <div>
      <h3>{{title}}</h3>
+     <el-table
+    ref="multipleTable"
+    :data="carts"
+    border
+    tooltip-effect="dark"
+    style="width: 100%"
+    @selection-change="handleSelectionChange">
+    <el-table-column
+      type="selection"
+      width="55">
+    </el-table-column>
+    <el-table-column
+      prop="title"
+      label="课程"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="price"
+      label="单价"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      label="数量"
+      width="200">
+      <template slot-scope="scope">
+      <el-input-number v-model="scope.row.count" :min="1" :max="100" label="描述文字"></el-input-number>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="总价"
+      width="120">
+      <template slot-scope="scope">{{ scope.row.price*scope.row.count }}</template>
+    </el-table-column>
+  </el-table>
      <table border="1">
       <tr>
         <th>#</th>
@@ -36,7 +70,8 @@ export default {
    data() {
      return {
       // 数据持久化存储，防止刷新页面，数据丢失
-      carts: JSON.parse(localStorage.getItem('carts')),
+      carts: JSON.parse(localStorage.getItem('carts')) || [],
+      multipleSelection: []
      }
    },
    computed: {
@@ -44,7 +79,7 @@ export default {
       return this.carts.length;
      },
      activeCount:function(){
-      return this.carts.filter((item)=>item.active).length;
+      return this.multipleSelection.filter((item)=>item.active).length;
      },
      totalPrice:function(){
       // let sum = 0;
@@ -85,6 +120,9 @@ export default {
     })
    },
    methods: {
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
     // 数据持久化存储
     setLocalData(n){
       localStorage.setItem('carts',JSON.stringify(n))
