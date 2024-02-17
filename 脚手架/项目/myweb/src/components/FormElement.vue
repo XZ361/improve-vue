@@ -3,12 +3,15 @@
     <h3>form表单</h3>
     <!-- 自研Ui -->
     {{ ruleForm }}
-    <f-form-item label="用户名" prop="name">
-      <f-input type="text" v-model="ruleForm.name"></f-input>
-    </f-form-item>
-    <f-form-item label="密码" prop="pwd">
-      <f-input type="password" v-model="ruleForm.pwd"></f-input>
-    </f-form-item>
+    <f-form :model="ruleForm" :rules="rules">
+      <f-form-item label="用户名" prop="name">
+        <f-input type="text" v-model="ruleForm.name"></f-input>
+      </f-form-item>
+      <f-form-item label="密码" prop="pwd">
+        <f-input type="password" v-model="ruleForm.pwd"></f-input>
+      </f-form-item>
+    </f-form>
+
     <!-- elementUi -->
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="名称" prop="name">
@@ -30,10 +33,12 @@
 // provide、inject 依赖注入，内部共享数据 
 import fInput from "./fInput.vue";
 import fFormItem from "./fFormItem.vue";
+import fForm from "./fForm.vue";
 export default {
   components: {
     fInput,
-    fFormItem
+    fFormItem,
+    fForm
   },
   data() {
     return {
@@ -47,7 +52,7 @@ export default {
           { min: 6, max: 10, message: '请输入6~10位名称' },
         ],
         pwd: [
-          { required: true, message: '请输入密码' }
+          { required: true, message: '请输入密码',min:4 }
         ],
       }
     };
