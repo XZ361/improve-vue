@@ -3,12 +3,15 @@
     <h3>form表单</h3>
     <!-- 自研Ui -->
     {{ ruleForm }}
-    <f-form :model="ruleForm" :rules="rules">
+    <f-form :model="ruleForm" :rules="rules" ref="ruleForm">
       <f-form-item label="用户名" prop="name">
         <f-input type="text" v-model="ruleForm.name"></f-input>
       </f-form-item>
       <f-form-item label="密码" prop="pwd">
         <f-input type="password" v-model="ruleForm.pwd"></f-input>
+      </f-form-item>
+      <f-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
       </f-form-item>
     </f-form>
 
@@ -21,7 +24,7 @@
         <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button type="primary" @click="submitForm2('ruleForm')">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -59,6 +62,18 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log(formName);
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      })
+    },
+    submitForm2(formName) {
+      console.log(formName);
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!');
@@ -67,7 +82,7 @@ export default {
           return false;
         }
       });
-    },
+    },  
   }
 };
 </script>
