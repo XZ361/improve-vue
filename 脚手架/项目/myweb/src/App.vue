@@ -9,11 +9,13 @@
       </li>
     </ul>
     <my-cart :title="title"></my-cart>
+    <FormElement></FormElement>
   </div>
 </template>
 
 <script>
 import myCart from "./components/cart.vue";
+import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: 'App',
@@ -24,7 +26,8 @@ export default {
     }
   },
   components: {
-    myCart
+    myCart,
+    FormElement
   },
   created () {
     this.getContent();
