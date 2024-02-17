@@ -4,7 +4,7 @@
     <!-- 插槽作用：分发内容或子组件 -->
     <slot></slot>
     <!-- 显示校验错误信息 -->
-    <p v-if="vaildateStatus ==='error'" class="error">{{ errorMessage }}</p>
+    <p v-if="vaildateStatus === 'error'" class="error">{{ errorMessage }}</p>
   </div>
 </template>
 <script>
@@ -29,19 +29,24 @@ export default {
       default: ''
     }
   },
-   data() {
+  data() {
     return {
-      vaildateStatus:'' ,//校验的状态值
-      errorMessage:''//显示的错误信息
+      vaildateStatus: '',//校验的状态值
+      errorMessage: ''//显示的错误信息
     }
   },
-  inject:['form'],
+  inject: ['form'],
   created() {
-    this.$on('validate',this.validate);
+    this.$on('validate', this.validate);
+  },
+  mounted () {
+    if(this.prop){
+      this.$parent.$emit('formItemAdd',this);
+    }
   },
   methods: {
-    validate(value){
-      console.log(value);
+    validate(value) {
+      // console.log(value);
       // let descriptor = {};//存储校验规则，来自于父组件Form
 
       // 获取校验对象==获取Form组件==》获取rules[this.prop]
@@ -51,29 +56,33 @@ export default {
       // console.log(this.form.rules[this.prop]);
       // 用户名框绑定的是name，this.prop就是name；同理pwd也是
       //  descriptor[this.prop] = this.form.rules[this.prop];
-      let descriptor = {
-        [this.prop]: this.form.rules[this.prop]
-      }
-      const validator = new Schema(descriptor);
-      // let obj = {};
-      // obj[this.prop] = value;
-      validator.validate({[this.prop]:value},errors=>{
-        if(errors){
-          // 显示错误
-          this.vaildateStatus = 'error';
-          this.errorMessage = errors[0].message;
-        }else{
-          // 错误置空
-          this.vaildateStatus = ' ';
-          this.error = '';
+      return new Promise((resolve) => {
+        let descriptor = {
+          [this.prop]: this.form.rules[this.prop]
         }
+        const validator = new Schema(descriptor);
+        // let obj = {};
+        // obj[this.prop] = value;
+        validator.validate({ [this.prop]: value }, errors => {
+          if (errors) {
+            // 显示错误
+            this.vaildateStatus = 'error';
+            this.errorMessage = errors[0].message;
+            resolve(false);
+          } else {
+            // 错误置空
+            this.vaildateStatus = ' ';
+            this.error = '';
+            resolve()
+          }
+        })
       })
     }
   }
 };
 </script>
 <style scoped>
-.error{
-  color:red;
+.error {
+  color: red;
 }
 </style>
